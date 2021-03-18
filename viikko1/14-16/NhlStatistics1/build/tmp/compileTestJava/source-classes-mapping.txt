@@ -1,0 +1,3 @@
+ohtuesimerkki/StatisticsTest.java
+ ohtuesimerkki.StatisticsTest
+ ohtuesimerkki.StatisticsTest$1
