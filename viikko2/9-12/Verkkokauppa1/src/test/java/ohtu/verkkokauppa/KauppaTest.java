@@ -16,7 +16,7 @@ public class KauppaTest {
     public void setUp() {
         pankki = mock(Pankki.class);
         viite = mock(Viitegeneraattori.class);
-        when(viite.uusi()).thenReturn(42);
+        
         varasto = mock(Varasto.class);
         kauppa = new Kauppa(varasto, pankki, viite);
         
@@ -43,6 +43,8 @@ public class KauppaTest {
     
     @Test
     public void ostoksenPaatyttyaPankinMetodiaTilisiirtoKutsutaanOikeillaParametreilla() {
+        when(viite.uusi()).thenReturn(42);
+        
         kauppa.aloitaAsiointi();
         kauppa.lisaaKoriin(1);   
         kauppa.tilimaksu("pekka", "12345");
@@ -53,6 +55,8 @@ public class KauppaTest {
     
     @Test
     public void eriTuotteitaOstettaessaPankinMetodiaTilisiirtoKutsutaanOikeillaParametreilla() {
+        when(viite.uusi()).thenReturn(42);
+        
         kauppa.aloitaAsiointi();
         kauppa.lisaaKoriin(1);
         kauppa.lisaaKoriin(2);
@@ -63,6 +67,8 @@ public class KauppaTest {
     
     @Test
     public void useampaaSamaaTuotettaOstettaessaPankinMetodiaTilisiirtoKutsutaanOikeillaParametreilla() {
+        when(viite.uusi()).thenReturn(42);
+        
         kauppa.aloitaAsiointi();
         kauppa.lisaaKoriin(1);
         kauppa.lisaaKoriin(1);
@@ -73,11 +79,59 @@ public class KauppaTest {
     
     @Test
     public void veloitetaanVainTuotteistaJoitaLoytyyVarastosta() {
+        when(viite.uusi()).thenReturn(42);
+        
         kauppa.aloitaAsiointi();
         kauppa.lisaaKoriin(1);
         kauppa.lisaaKoriin(3);
         kauppa.tilimaksu("pekka", "12345");
         
         verify(pankki).tilisiirto("pekka", 42, "12345", "33333-44455", 5);
+    }
+    
+    @Test
+    public void kaupanMetodiAloitaAsiointiNollaaEdellisenOstoksenTiedot() {
+        when(viite.uusi()).thenReturn(42);
+        
+        kauppa.aloitaAsiointi();
+        kauppa.lisaaKoriin(1);
+        
+        kauppa.aloitaAsiointi();
+        kauppa.lisaaKoriin(2);
+        kauppa.tilimaksu("pekka", "12345");
+        
+        verify(pankki).tilisiirto("pekka", 42, "12345", "33333-44455", 3);
+    }
+    
+    @Test
+    public void kauppaPyytaaUudenViitenumeronJokaOstokselle() {
+        when(viite.uusi())
+            .thenReturn(1)
+            .thenReturn(2);
+        
+        kauppa.aloitaAsiointi();
+        kauppa.lisaaKoriin(1);
+        kauppa.tilimaksu("pekka", "12345");
+        
+        verify(pankki).tilisiirto("pekka", 1, "12345", "33333-44455", 5);
+        
+        kauppa.aloitaAsiointi();
+        kauppa.lisaaKoriin(2);
+        kauppa.tilimaksu("pekka", "12345");
+        
+        verify(pankki).tilisiirto("pekka", 2, "12345", "33333-44455", 3);
+    }
+    
+    @Test
+    public void koristaPoistetustaTuotteestaEiVeloiteta() {
+        when(viite.uusi()).thenReturn(42);
+        
+        kauppa.aloitaAsiointi();
+        kauppa.lisaaKoriin(1);
+        kauppa.lisaaKoriin(2);
+        kauppa.poistaKorista(1);
+        kauppa.tilimaksu("pekka", "12345");
+        
+        verify(pankki).tilisiirto("pekka", 42, "12345", "33333-44455", 3);
     }
 }
