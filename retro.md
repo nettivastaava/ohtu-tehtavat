@@ -1,0 +1,5 @@
+## Miniprojektin retrospektiivi
+
+Olemme ryhmämme kanssa pitäneet retrospektiivin heti asiakastapaamisen jälkeen. Olemme kummallakin kerralla käyttäneet Glad, Sad, Mad -menetelmää. Jokainen siis lisäsi enemmän tai vähemmän anonyymisti Flingassa post-it -lappuja kolmeen kategoriaan, minkä jälkeen nämä käytiin yhdessä läpi. Huomautettakoon, ettemme käyttäneet tähän tuntia, vaan ehkä 15 minuuttia.
+	Ensimmäisellä viikolla menettely tuntui jopa vähän turhalta, sillä kaikilla oli hyvin yhtenevä näkemys siitä, että viikko sujui kaikin puolin hienosti. Tässä ei toki muuten ole mitään vikaa, mutta viikottaisen työajan ollessa hyvin rajoitettu, on mielestäni tärkeää rajata palaveeraamiseen käytettyä aikaa.
+	Toisella viikolla onnistuimme mielestäni jo paremmin poimimaan projektin kulusta pieniä epäkohtia, kuten työnjaon paikoittainen epäselvyys sekä se, että tärkeitä asioita jätettiin viime tinkaan. Uskonkin, että näihin asioihin tullaan tämän ansiosta kiinnittämään huomioita viimeisen sprintin aikana.
